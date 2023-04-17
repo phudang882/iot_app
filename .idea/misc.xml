@@ -3,7 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable-v24/rounded_green.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable-v24/rounded_red.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable-v24/rounded_yellow.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/body_shape.xml" value="0.26614583333333336" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/circle_blue.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/circle_green.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/circle_red.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/circle_yellow.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/half_rounded_yellow.xml" value="0.72" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/quarter_circle_yellow.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/rounded_blue.xml" value="0.14375" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/drawable/voice_icon_mic.xml" value="0.26614583333333336" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/layout/content.xml" value="0.25" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/layout/fragment_voice.xml" value="0.25" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/layout/home.xml" value="0.18489583333333334" />
+        <entry key="..\:/Y3-P2/IOT/Lab/MyApplication/app/src/main/res/menu/menu_bottom_nav.xml" value="0.18489583333333334" />
       </map>
     </option>
   </component>
@@ -12,5 +28,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>

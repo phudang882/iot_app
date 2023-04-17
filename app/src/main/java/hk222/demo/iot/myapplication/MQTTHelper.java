@@ -24,7 +24,7 @@ public class MQTTHelper {
     final String clientId = "12345789";
 //    final String username = "dlhcmut";
     final String username = "xMysT";
-    final String password = "aio_lygc58Jbcd6VyhRVtBbl4GOCWPxh";
+    final String password = "aio_Scay93ziMZ7UpBMTbvAs0vYFQBmy";
 
     final String serverUri = "tcp://io.adafruit.com:1883";
 
