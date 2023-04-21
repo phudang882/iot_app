@@ -1,12 +1,7 @@
 package hk222.demo.iot.myapplication;
 
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,10 +13,9 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import java.nio.charset.StandardCharsets;
 
-import java.nio.charset.Charset;
-
-public class Home extends Fragment {
+public class Home extends BaseActivity {
 
     MQTTHelper mqttHelper;
     TextView txtSensor_1;
@@ -30,30 +24,23 @@ public class Home extends Fragment {
     ProgressBar humiProgressBar;
     LabeledSwitch toggle_switch_fan;
     LabeledSwitch toggle_switch_led;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("Home", "onCreateView: ");
+
         super.onCreate(savedInstanceState);
-//        view.setContentView(R.layout.activity_main);
-
-    }
-
-
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.home, container, false);
-        tempProgressBar = view.findViewById(R.id.tempProgressBar_1);
-        humiProgressBar = view.findViewById(R.id.humidProgressBar_1);
-        txtSensor_1 = view.findViewById(R.id.tempText_1);
-        txtSensor_2 = view.findViewById(R.id.humidText_1);
-        toggle_switch_fan = view.findViewById(R.id.toggle_switch_fan);
-        toggle_switch_led = view.findViewById(R.id.toggle_switch_led);
-
+        tempProgressBar = findViewById(R.id.tempProgressBar_1);
+        humiProgressBar = findViewById(R.id.humidProgressBar_1);
+        txtSensor_1 = findViewById(R.id.tempText_1);
+        txtSensor_2 = findViewById(R.id.humidText_1);
+        toggle_switch_fan = findViewById(R.id.toggle_switch_fan);
+        toggle_switch_led = findViewById(R.id.toggle_switch_led);
         toggle_switch_fan.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
-                if (isOn == true) {
+                if (isOn) {
                     sendDataMQTT("xMysT/feeds/button2", "ON");
                 } else {
                     sendDataMQTT("xMysT/feeds/button2", "OFF");
@@ -64,7 +51,7 @@ public class Home extends Fragment {
         toggle_switch_led.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
-                if (isOn == true) {
+                if (isOn) {
                     sendDataMQTT("xMysT/feeds/button1", "ON");
                 } else {
                     sendDataMQTT("xMysT/feeds/button1", "OFF");
@@ -73,8 +60,19 @@ public class Home extends Fragment {
         });
 
         startMQTT();
-        return view;
     }
+
+    @Override
+    int getContentViewId() {
+        return R.layout.home_menu;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.action_home;
+    }
+
+
 
     public void sendDataMQTT(String topic, String value) {
         MqttMessage msg = new MqttMessage();
@@ -82,18 +80,19 @@ public class Home extends Fragment {
         msg.setQos(0);
         msg.setRetained(false);
 
-        byte[] b = value.getBytes(Charset.forName("UTF-8"));
+        byte[] b = value.getBytes(StandardCharsets.UTF_8);
         msg.setPayload(b);
 
         try {
             mqttHelper.mqttAndroidClient.publish(topic, msg);
         }catch (MqttException e){
-
+            String TAG = "Home";
+            Log.d(TAG,"No publish");
         }
     }
 
     public void startMQTT() {
-        mqttHelper = new MQTTHelper(getContext());
+        mqttHelper = new MQTTHelper(this);
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean reconnect, String serverURI) {
@@ -106,24 +105,16 @@ public class Home extends Fragment {
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            public void messageArrived(String topic, MqttMessage message) throws Exception  {
                 Log.d("Received: ",topic + "***" + message.toString());
                 if (topic.contains("sensor")) {
                     txtSensor_1.setText(message.toString());
 //                    Integer temp = message.toString();
                     tempProgressBar.setProgress(Math.round(Integer.parseInt(message.toString())), true);
                 } else if (topic.contains("button1")) {
-                    if (message.toString().equals("ON")) {
-                        toggle_switch_led.setOn(true);
-                    } else {
-                        toggle_switch_led.setOn(false);
-                    }
+                    toggle_switch_led.setOn(message.toString().equals("ON"));
                 } else if (topic.contains("button2")) {
-                    if (message.toString().equals("ON")) {
-                        toggle_switch_fan.setOn(true);
-                    } else {
-                        toggle_switch_fan.setOn(false);
-                    }
+                    toggle_switch_fan.setOn(message.toString().equals("ON"));
                 } else if (topic.contains("receive")) {
                     txtSensor_2.setText(message.toString());
                     humiProgressBar.setProgress(Math.round(Float.parseFloat(message.toString())), true);

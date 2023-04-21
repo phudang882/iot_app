@@ -87,15 +87,15 @@ public class MQTTHelper {
             });
 
 
-        } catch (MqttException ex){
+        } catch (Exception ex){
             ex.printStackTrace();
         }
     }
 
     private void subscribeToTopic() {
-        for (int i = 0; i < arrayTopics.length; i++) {
+        for (String arrayTopic : arrayTopics) {
             try {
-                mqttAndroidClient.subscribe(arrayTopics[i], 0, null, new IMqttActionListener() {
+                mqttAndroidClient.subscribe(arrayTopic, 0, null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
                         Log.d("TEST", "Subscribed!");

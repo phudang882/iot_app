@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hk222.demo.iot.myapplication">
+          xmlns:tools="http://schemas.android.com/tools" package="hk222.demo.iot.myapplication">
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.camera.autofocus"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.camera.front"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.camera.front.autofocus"
+            android:required="false" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/iot_icon"
+        android:roundIcon="@drawable/iot_icon"
         android:supportsRtl="true"
+        android:label = "IOT manager"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".Camera"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
