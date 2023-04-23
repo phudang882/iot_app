@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
                 intent = new Intent(this,Home.class);
             }
         }
-        startActivity(intent);
+        startActivity(intent  );
 
         //finish()
         return true;
