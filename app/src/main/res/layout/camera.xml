@@ -24,7 +24,7 @@
         />
         <include
                 android:id="@+id/bottomNavigationView"
-                layout="@layout/element_bottom_navigation"
+                layout="@layout/menu_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

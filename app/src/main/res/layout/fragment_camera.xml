@@ -16,21 +16,21 @@
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   android:id="@+id/camera_container"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:id="@+id/camera_container"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_height="match_parent"
+                                                   android:backgroundTint="@color/colorPrimary">
+    <androidx.camera.view.PreviewView
+            android:id="@+id/view_finder"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+
     <include
             android:id="@+id/labelLayout"
             layout="@layout/item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    <androidx.camera.view.PreviewView
-            android:id="@+id/view_finder"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:scaleType="fillStart" app:layout_constraintTop_toBottomOf="@+id/labelLayout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

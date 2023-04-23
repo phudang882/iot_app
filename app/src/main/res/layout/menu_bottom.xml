@@ -6,6 +6,8 @@
     app:labelVisibilityMode="labeled"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/windowBackground"
+    android:background="@drawable/bg_menu1"
     app:menu="@menu/menu_bottom_nav"
+    app:itemTextColor="@color/bottom_nav_color"
+    app:itemIconTint="@color/bottom_nav_color"
     />

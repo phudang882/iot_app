@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.MyApplication1" parent="Base.CardView">
+        <!-- Primary brand color. -->
+        <!-- Status bar color. -->
+        <item name="android:backgroundTint" tools:targetApi="l">@color/colorPrimary</item>
+        <!-- Customize your theme here. -->
+    </style>
 </resources>

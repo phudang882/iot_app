@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      app:background="@drawable/shape"
+>
     <item
         android:id="@+id/action_home"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/home_icon"
         android:title="@string/action_home"/>
 
     <item
         android:id="@+id/action_camera"
-        android:icon="@drawable/camera_icon_capture"
+        android:icon="@drawable/camera_icon"
         android:title="@string/action_camera"/>
 
-<!--    <item-->
-<!--        android:id="@+id/action_voice"-->
-<!--        android:icon="@drawable/voice_icon_mic"-->
-<!--        android:title="@string/action_voice" />-->
 </menu>
