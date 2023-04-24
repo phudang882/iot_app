@@ -31,6 +31,7 @@
         android:label = "IOT manager"
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".Camera"/>
+        <activity android:name=".Setting"/>
         <activity
             android:name=".Home"
             android:exported="true">

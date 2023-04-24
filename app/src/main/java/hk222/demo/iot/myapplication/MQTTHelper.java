@@ -14,19 +14,20 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.util.*;
+
 
 public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    public final String[] arrayTopics = {"xMysT/feeds/sensor", "xMysT/feeds/button1", "xMysT/feeds/receive", "xMysT/feeds/button2"};
-//    public final String[] arrayTopics = {"dlhcmut/feeds/bbc-fan", "dlhcmut/feeds/bbc-led", "dlhcmut/feeds/bbc-temp"};
-
-    final String clientId = "12345789";
+    public static ArrayList<String> defaultTopic =
+        new ArrayList<>(Arrays.asList("sensor", "sensor1", "sensor2", "button1", "button2"));
+    public static String clientId = "12345789";
 //    final String username = "dlhcmut";
-    final String username = "xMysT";
-    final String password = "aio_Scay93ziMZ7UpBMTbvAs0vYFQBmy";
+    public static String username = "phudang882";
+    public static String password = "aio_FfZH91EvNw4w9hsASdAmMKR7UCn9";
 
-    final String serverUri = "tcp://io.adafruit.com:1883";
+    public static String serverUri = "tcp://io.adafruit.com:1883";
 
     public MQTTHelper(Context context){
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
@@ -70,7 +71,7 @@ public class MQTTHelper {
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-
+                    Log.w("Mqtt", "onSuccess: ");
                     DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
                     disconnectedBufferOptions.setBufferEnabled(true);
                     disconnectedBufferOptions.setBufferSize(100);
@@ -83,19 +84,20 @@ public class MQTTHelper {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
+                    Log.e("Mqtt", username + " " +password);
                 }
             });
-
-
+//aio_FfZH91EvNw4w9hsASdAmMKR7UCn9
+//aio_FfZH91EvNw4w9hsASdAmMKR7UCn9
         } catch (Exception ex){
             ex.printStackTrace();
         }
     }
 
     private void subscribeToTopic() {
-        for (String arrayTopic : arrayTopics) {
+        for (String arrayTopic : defaultTopic) {
             try {
-                mqttAndroidClient.subscribe(arrayTopic, 0, null, new IMqttActionListener() {
+                mqttAndroidClient.subscribe(username+ "/feeds/"+ arrayTopic, 0, null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
                         Log.d("TEST", "Subscribed!");

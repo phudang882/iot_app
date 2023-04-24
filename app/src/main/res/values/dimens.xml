@@ -16,5 +16,6 @@
     <dimen name="bottom_sheet_spinner_delegate_min_width">160dp</dimen>
     <dimen name="bottom_sheet_spinner_model_min_width">240dp</dimen>
     <dimen name="bottom_sheet_seperate_results_line">1dp</dimen>
+    <dimen name="title_text">20sp</dimen>
     <integer name="bottom_sheet_control_text_min_ems">3</integer>
 </resources>

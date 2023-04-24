@@ -13,4 +13,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="led">led</string>
+    <string name="your_ada">Setting your adafruit account</string>
+    <string name="user_title">User name</string>
+    <string name="user_hint">Adafruit user name</string>
+    <string name="api_key_title">Key</string>
+    <string name="api_key_hint">Adafruit key</string>
+    <string name="save_button_text">submit</string>
+    <string name="Thint">Temperator feed</string>
+    <string name="huminity">Huminity</string>
+    <string name="Hhint">Huminity feed</string>
+    <string name="gas">Gas</string>
+    <string name="Ghint">Gas feed</string>
+    <string name="light">Light</string>
+    <string name="Lhint">Light feed</string>
+    <string name="fan">Fan</string>
+    <string name="Fhint">Fan feed</string>
 </resources>

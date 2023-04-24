@@ -12,5 +12,8 @@
         android:id="@+id/action_camera"
         android:icon="@drawable/camera_icon"
         android:title="@string/action_camera"/>
-
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/setting_icon"
+        android:title="@string/action_setting"/>
 </menu>

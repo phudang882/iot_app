@@ -1,6 +1,8 @@
 package hk222.demo.iot.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -12,13 +14,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public abstract class BaseActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    public MQTTHelper mqttHelper = null;
     protected BottomNavigationView navigationView;
-
+    protected static SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
-
+        if (mqttHelper == null){
+            mqttHelper = new MQTTHelper(this);
+        }
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -36,24 +41,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         overridePendingTransition(0, 0);
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Log.d("Item", "onNavigationItemSelected: ");
         Intent intent;
-        switch (item.getItemId()){
-            case R.id.action_home:{
+        final int i = item.getItemId();
+        if (i== R.id.action_home){
                 intent = new Intent(this, Home.class);
-                break;
-            }
-            case R.id.action_camera:{
-                intent = new Intent(this, Camera.class);
-                break;
-            }
-            default:{
-                intent = new Intent(this,Home.class);
-            }
         }
-        startActivity(intent  );
+        else if (i == R.id.action_camera){
+                intent = new Intent(this, Camera.class);
+        }
+        else if (i == R.id.action_setting){
+                intent = new Intent(this,Setting.class);
+        }
+        else {
+            intent = new Intent(this,Home.class);
+        }
+        startActivity(intent);
 
         //finish()
         return true;

@@ -41,9 +41,9 @@ public class Home extends BaseActivity {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                 if (isOn) {
-                    sendDataMQTT("xMysT/feeds/button2", "ON");
+                    sendDataMQTT(MQTTHelper.username +"/feeds/"+ MQTTHelper.defaultTopic.get(4), "ON");
                 } else {
-                    sendDataMQTT("xMysT/feeds/button2", "OFF");
+                    sendDataMQTT(MQTTHelper.username +"/feeds/" + MQTTHelper.defaultTopic.get(4), "OFF");
                 }
             }
         });
@@ -52,9 +52,9 @@ public class Home extends BaseActivity {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
                 if (isOn) {
-                    sendDataMQTT("xMysT/feeds/button1", "ON");
+                    sendDataMQTT(MQTTHelper.username +"/feeds/"+MQTTHelper.defaultTopic.get(3), "ON");
                 } else {
-                    sendDataMQTT("xMysT/feeds/button1", "OFF");
+                    sendDataMQTT(MQTTHelper.username +"/feeds/"+MQTTHelper.defaultTopic.get(3), "OFF");
                 }
             }
         });
