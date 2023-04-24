@@ -21,16 +21,17 @@ public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
     public static ArrayList<String> defaultTopic =
-        new ArrayList<>(Arrays.asList("sensor", "sensor1", "sensor2", "button1", "button2"));
+        new ArrayList<>(Arrays.asList("sensor", "sensor1", "sensor2", "buttonA", "buttonB"));
     public static String clientId = "12345789";
 //    final String username = "dlhcmut";
     public static String username = "phudang882";
-    public static String password = "aio_FfZH91EvNw4w9hsASdAmMKR7UCn9";
-
+    public static String password = "aio_RTfm16FR1X6rsj7qMEBa5om84Nbs";
     public static String serverUri = "tcp://io.adafruit.com:1883";
 
     public MQTTHelper(Context context){
-        mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
+        Random random = new Random();
+        int a = 100000000 + random.nextInt(899999999);
+        mqttAndroidClient = new MqttAndroidClient(context, serverUri,String.valueOf(a));
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
@@ -87,8 +88,6 @@ public class MQTTHelper {
                     Log.e("Mqtt", username + " " +password);
                 }
             });
-//aio_FfZH91EvNw4w9hsASdAmMKR7UCn9
-//aio_FfZH91EvNw4w9hsASdAmMKR7UCn9
         } catch (Exception ex){
             ex.printStackTrace();
         }

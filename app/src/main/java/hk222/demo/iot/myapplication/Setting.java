@@ -48,7 +48,7 @@ public class Setting extends BaseActivity {
         AppCompatButton appCompatButton = findViewById(R.id.save_button);
         settings.clear();
         appCompatButton.setOnClickListener(view -> {
-            Log.d(TAG, view.toString());
+            appCompatButton.setText(R.string.saving);
             for (int i = 0; i < constraintLayout.getChildCount(); i++) {
                 View temp = constraintLayout.getChildAt(i);
                 if (temp instanceof EditText){
@@ -60,6 +60,7 @@ public class Setting extends BaseActivity {
             }
             editor.apply();
             Setting.this.updateStatic(settings);
+            appCompatButton.setText(R.string.save_button_text);
         });
     }
     public void updateStatic(ArrayList<String> arrayList){

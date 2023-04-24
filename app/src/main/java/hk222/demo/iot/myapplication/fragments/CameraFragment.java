@@ -17,9 +17,11 @@ package hk222.demo.iot.myapplication.fragments;
  */
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,14 +41,18 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.appcompat.widget.AppCompatImageButton;
 import com.google.common.util.concurrent.ListenableFuture;
+import hk222.demo.iot.myapplication.*;
+import hk222.demo.iot.myapplication.databinding.CameraBinding;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.tensorflow.lite.support.label.Category;
+
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import hk222.demo.iot.myapplication.ImageClassifierHelper;
-import hk222.demo.iot.myapplication.R;
 import hk222.demo.iot.myapplication.databinding.FragmentCameraBinding;
 import org.tensorflow.lite.task.vision.classifier.Classifications;
 
@@ -54,7 +60,7 @@ import org.tensorflow.lite.task.vision.classifier.Classifications;
 public class CameraFragment extends Fragment
         implements ImageClassifierHelper.ClassifierListener {
     private static final String TAG = "Image Classifier";
-
+    private double time;
     private FragmentCameraBinding fragmentCameraBinding;
     private ImageClassifierHelper imageClassifierHelper;
     private Bitmap bitmapBuffer;
@@ -93,6 +99,13 @@ public class CameraFragment extends Fragment
                                        }
                                    }
         );
+//        timerRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                CameraFragment.this.sendDataMQTT(BaseActivity.mqttHelper,MQTTHelper.username +"/feeds/AI",tvLabel.getText().toString());
+//                timerHandler.postDelayed(this,1000);
+//            }
+//        };
         return fragmentCameraBinding.getRoot();
     }
 
@@ -249,5 +262,22 @@ public class CameraFragment extends Fragment
             return;
         }
         tvLabel.setText(category.getLabel());
+
+    }
+    public void sendDataMQTT(MQTTHelper mqttHelper, String topic, String value) {
+        MqttMessage msg = new MqttMessage();
+        msg.setId(1234);
+        msg.setQos(0);
+        msg.setRetained(false);
+
+        byte[] b = value.getBytes(StandardCharsets.UTF_8);
+        msg.setPayload(b);
+
+        try {
+            mqttHelper.mqttAndroidClient.publish(topic, msg);
+        }catch (MqttException e){
+            String TAG = "Home";
+            Log.d(TAG,"No publish");
+        }
     }
 }

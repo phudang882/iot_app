@@ -11,10 +11,12 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 public abstract class BaseActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    public MQTTHelper mqttHelper = null;
+    public static MQTTHelper mqttHelper = null;
+
     protected BottomNavigationView navigationView;
     protected static SharedPreferences sharedPreferences;
     @Override
@@ -58,6 +60,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         }
         else {
             intent = new Intent(this,Home.class);
+        }
+        try {
+            mqttHelper.mqttAndroidClient.disconnect();
+        } catch (MqttException e) {
+            throw new RuntimeException(e);
         }
         startActivity(intent);
 

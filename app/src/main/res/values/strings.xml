@@ -27,5 +27,6 @@
     <string name="light">Light</string>
     <string name="Lhint">Light feed</string>
     <string name="fan">Fan</string>
+    <string name="saving">saving</string>
     <string name="Fhint">Fan feed</string>
 </resources>
