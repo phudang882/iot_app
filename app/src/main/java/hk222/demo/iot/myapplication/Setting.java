@@ -30,26 +30,36 @@ public class Setting extends BaseActivity {
             settings.add(BaseActivity.username);
             settings.add(BaseActivity.password);
             settings.addAll(BaseActivity.defaultTopic);
-            for (int i = 0; i < 7; i++) {
+            int len = settings.size();
+            for (int i = 0; i < len; i++) {
                 editor.putString(String.valueOf(i),settings.get(i));
+                Log.d(TAG,settings.get(i));
             }
             editor.apply();
             Log.d(TAG,sharedPreferences.getString("0",""));
         }
         settings.clear();
-        for (int i = 0; i < 7; i++) {
+        ConstraintLayout constraintLayout = findViewById(R.id.inputText);
+        int len = sharedPreferences.getAll().size();
+        for(int i= 0;i< len;++i){
             settings.add(sharedPreferences.getString(String.valueOf(i),""));
         }
-        ConstraintLayout constraintLayout = findViewById(R.id.inputText);
+        Log.d(TAG, String.valueOf(len));
+        for (String setting : settings) {
+            Log.d(TAG, "shared "+setting);
+        }
+        Log.d(TAG, String.valueOf(settings.size()));
         View v;
-        for (int i = 0; i < constraintLayout.getChildCount(); i++) {
+        for (int i = 0,j=0; i < constraintLayout.getChildCount(); i++) {
             v = constraintLayout.getChildAt(i);
             if (v instanceof EditText){
-                ((EditText) v).setText(settings.get(i/2));
+//                ((EditText) v).setText(settings.get(j));
+//                j++;
+                Log.d(TAG, String.valueOf(v.getId()));
             }
         }
-        AppCompatButton appCompatButton = findViewById(R.id.save_button);
         settings.clear();
+        AppCompatButton appCompatButton = findViewById(R.id.save_button);
         appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,13 +68,14 @@ public class Setting extends BaseActivity {
                 appCompatButton.setText(R.string.saving);
                 appCompatButton.setTypeface(Typeface.DEFAULT,Typeface.ITALIC);
                 ArrayList<String> arrayList = new ArrayList<>();
-                for (int i = 0; i < constraintLayout.getChildCount(); i++) {
+                int a = constraintLayout.getChildCount();
+                for (int i = 0; i< a; i++) {
                     View temp = constraintLayout.getChildAt(i);
                     if (temp instanceof EditText){
                         arrayList.add(((EditText) temp).getText().toString());
                     }
                 }
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < a; i++) {
                     editor.putString(String.valueOf(i),arrayList.get(i));
                 }
                 editor.apply();
@@ -73,7 +84,7 @@ public class Setting extends BaseActivity {
                     @Override
                     public void run() {
                         appCompatButton.setText(R.string.save_button_text);
-                        appCompatButton.setTypeface(Typeface.DEFAULT);
+                        appCompatButton.setTypeface(Typeface.DEFAULT,Typeface.NORMAL);
                     }
                 }, 1000);
         }});

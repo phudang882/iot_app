@@ -24,14 +24,14 @@ import java.util.*;
 public class MQTTHelper {
     private static final String TAG = "MQTTHelper";
 
-    private static DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-    public static class Data {
-        public Date date;
-        public String message;
-        public Data(String date, String message) throws ParseException {
-            this.message = message;
-        }
-    }
+//    private static DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+//    public static class Data {
+//        public Date date;
+//        public String message;
+//        public Data(String date, String message) throws ParseException {
+//            this.message = message;
+//        }
+//    }
     public MqttAndroidClient mqttAndroidClient;
 
     public MQTTHelper(Context context){
