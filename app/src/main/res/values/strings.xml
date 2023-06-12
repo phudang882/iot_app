@@ -29,4 +29,8 @@
     <string name="fan">Fan</string>
     <string name="saving">saving</string>
     <string name="Fhint">Fan feed</string>
+    <string name="temperator">Temperator</string>
+    <string name="ai">AI</string>
+    <string name="Ahint">AI feed</string>
+
 </resources>

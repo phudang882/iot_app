@@ -14,7 +14,7 @@
     <color name="main_blue">#6588e4</color>
 
     <!--    <color name="colorPrimary">#6E72D9</color>-->
-    <color name="colorPrimary">#00BFFF</color>
+    <color name="colorPrimary">#2072AF</color>
     <color name="color_selected_bottom_navigation">#FFF</color>
     <!--    <color name="color_selected_home_view_pager">@color/purple_700</color>-->
     <color name="color_selected_home_view_pager">@color/colorPrimaryDarkBlue</color>

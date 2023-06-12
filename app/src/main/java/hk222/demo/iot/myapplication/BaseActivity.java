@@ -5,18 +5,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class BaseActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    public static MQTTHelper mqttHelper = null;
 
+    public static ArrayList<String> defaultTopic =
+            new ArrayList<>(Arrays.asList("sensor", "sensor1", "sensor2", "buttonA", "buttonB","AI"));
+    public static String clientId = "12345789";
+    //    final String username = "dlhcmut";
+    public static String username = "phudang882";
+    public static String password = "aio_UaqF95J8PogiLwGBKqTqmoqbocDG";
+    public static String serverUri = "tcp://io.adafruit.com:1883";
+    public MQTTHelper mqttHelper = null;
     protected BottomNavigationView navigationView;
     protected static SharedPreferences sharedPreferences;
     @Override
@@ -24,7 +36,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
         if (mqttHelper == null){
-            mqttHelper = new MQTTHelper(this);
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            username = sharedPreferences.getString("0","");
+            password = sharedPreferences.getString("1","");
+            for(int i=2;i<7;++i){
+                defaultTopic.set(i-2,sharedPreferences.getString(String.valueOf(i),""));
+            }
         }
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
@@ -61,11 +78,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         else {
             intent = new Intent(this,Home.class);
         }
-        try {
-            mqttHelper.mqttAndroidClient.disconnect();
-        } catch (MqttException e) {
-            throw new RuntimeException(e);
-        }
         startActivity(intent);
 
         //finish()
@@ -82,8 +94,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BottomNa
         item.setChecked(true);
     }
 
+
+
     abstract int getContentViewId();
 
     abstract int getNavigationMenuItemId();
+
 
 }

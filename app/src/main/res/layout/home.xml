@@ -12,7 +12,7 @@
         android:layout_width="340dp"
         android:layout_height="130dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-50dp"
+        android:layout_marginBottom="-80dp"
         android:background="@drawable/shape"
         android:elevation="3dp"
         app:layout_constraintBottom_toTopOf="@+id/living_room_setting_container"
@@ -148,29 +148,30 @@
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/living_room_setting_container"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_below="@+id/weatherForecast"
-        android:background="@drawable/body_shape"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+            android:id="@+id/living_room_setting_container"
+            android:layout_width="417dp"
+            android:layout_height="539dp"
+            android:layout_below="@+id/weatherForecast"
+            android:background="@drawable/body_shape"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_centerHorizontal="true"
-                android:layout_width="340dp"
-                android:layout_height="130dp"
+                android:layout_width="210dp"
+                android:layout_height="66dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.3"
+
                 android:id="@+id/frameLayout2">
             <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="86dp"
+                    android:layout_width="66dp"
                     android:layout_height="86dp"
                     app:srcCompat="@drawable/light_20"
                     android:layout_centerVertical="true"
@@ -190,13 +191,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_centerHorizontal="true"
-                android:layout_width="340dp"
-                android:layout_height="130dp"
+                android:layout_width="210dp"
+                android:layout_height="66dp"
+                android:id="@+id/frameLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintVertical_bias="0.2"
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
             <com.github.angads25.toggle.widget.LabeledSwitch
@@ -210,12 +212,43 @@
                     app:textOff="OFF"
                     app:textOn="ON"
                     app:layout_constraintStart_toEndOf="@+id/imageView"/>
-            <ImageView
-                    android:layout_width="86dp"
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="66dp"
                     android:layout_height="86dp"
                     app:srcCompat="@drawable/fan_20"
-                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" android:id="@+id/imageView"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_centerHorizontal="true"
+                android:layout_width="210dp"
+                android:layout_height="66dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+
+            <com.github.angads25.toggle.widget.LabeledSwitch
+                    android:id="@+id/toggle_switch_"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="86dp"
+                    android:textSize="14sp"
+                    app:colorBorder="@color/colorAccent"
+                    app:on="false"
+                    app:textOff="OFF"
+                    app:textOn="ON"
+                    app:layout_constraintStart_toEndOf="@+id/imageView1"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="66dp"
+                    android:layout_height="86dp"
+                    app:srcCompat="@drawable/fan_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:id="@+id/imageView1"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

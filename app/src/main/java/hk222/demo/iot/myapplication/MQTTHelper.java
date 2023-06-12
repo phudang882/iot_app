@@ -1,5 +1,6 @@
 package hk222.demo.iot.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 //import android.os.Build;
 import android.util.Log;
@@ -14,24 +15,29 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class MQTTHelper {
-    public MqttAndroidClient mqttAndroidClient;
+    private static final String TAG = "MQTTHelper";
 
-    public static ArrayList<String> defaultTopic =
-        new ArrayList<>(Arrays.asList("sensor", "sensor1", "sensor2", "buttonA", "buttonB"));
-    public static String clientId = "12345789";
-//    final String username = "dlhcmut";
-    public static String username = "phudang882";
-    public static String password = "aio_RTfm16FR1X6rsj7qMEBa5om84Nbs";
-    public static String serverUri = "tcp://io.adafruit.com:1883";
+    private static DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    public static class Data {
+        public Date date;
+        public String message;
+        public Data(String date, String message) throws ParseException {
+            this.message = message;
+        }
+    }
+    public MqttAndroidClient mqttAndroidClient;
 
     public MQTTHelper(Context context){
         Random random = new Random();
         int a = 100000000 + random.nextInt(899999999);
-        mqttAndroidClient = new MqttAndroidClient(context, serverUri,String.valueOf(a));
+        mqttAndroidClient = new MqttAndroidClient(context, BaseActivity.serverUri,String.valueOf(a));
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
@@ -55,7 +61,9 @@ public class MQTTHelper {
         });
         connect();
     }
-
+//    public DataPoint getData(String feed){
+//
+//    }
     public void setCallback(MqttCallbackExtended callback) {
         mqttAndroidClient.setCallback(callback);
     }
@@ -64,8 +72,8 @@ public class MQTTHelper {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+        mqttConnectOptions.setUserName(BaseActivity.username);
+        mqttConnectOptions.setPassword(BaseActivity.password.toCharArray());
 
         try {
 
@@ -84,8 +92,8 @@ public class MQTTHelper {
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt", "Failed to connect to: " + serverUri + exception.toString());
-                    Log.e("Mqtt", username + " " +password);
+                    Log.w("Mqtt", "Failed to connect to: " + BaseActivity.serverUri + exception.toString());
+                    Log.e("Mqtt", BaseActivity.username + " " +BaseActivity.password);
                 }
             });
         } catch (Exception ex){
@@ -94,9 +102,9 @@ public class MQTTHelper {
     }
 
     private void subscribeToTopic() {
-        for (String arrayTopic : defaultTopic) {
+        for (String arrayTopic : BaseActivity.defaultTopic) {
             try {
-                mqttAndroidClient.subscribe(username+ "/feeds/"+ arrayTopic, 0, null, new IMqttActionListener() {
+                mqttAndroidClient.subscribe(BaseActivity.username+ "/feeds/"+ arrayTopic, 0, null, new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
                         Log.d("TEST", "Subscribed!");
