@@ -85,20 +85,6 @@ public class CameraFragment extends Fragment
         fragmentCameraBinding = FragmentCameraBinding
                 .inflate(inflater, container, false);
         tvLabel = fragmentCameraBinding.labelLayout.tvLabel;
-        AppCompatImageButton button = fragmentCameraBinding.labelLayout.switchButtion;
-        button.setOnClickListener(new View.OnClickListener() {
-                                       @Override
-                                       public void onClick(View view) {
-                                           if (lensFacing == CameraSelector.LENS_FACING_FRONT) {
-                                               lensFacing = CameraSelector.LENS_FACING_BACK;
-                                           } else {
-                                               lensFacing = CameraSelector.LENS_FACING_FRONT;
-                                           }
-                                           fragmentCameraBinding.viewFinder.post(CameraFragment.this::setUpCamera);
-
-                                       }
-                                   }
-        );
 //        timerRunnable = new Runnable() {
 //            @Override
 //            public void run() {
